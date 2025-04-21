@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeetYu | Elevate Your Consciousness</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cursor.js" defer></script>
+    <script src="js/theme.js" defer></script>
+
+    
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Ambient background -->
+    <div class="ambient-background">
+        <div class="gradient-sphere"></div>
+        <div class="grain-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container cursor-hover">
+            <a href="index.html" class="logo cursor-hover">
+                <img src="assets/MeetYu_Logo_Small.png" alt="MeetYu Logo" class="logo-img cursor-hover">
+                <span class="logo-text">MeetYu</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="journey.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Journey</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="quiz.html" class="nav-link cursor-hover">
+                    <span class="link-text">Why MeetYu?</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="about.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Mission</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="team.html" class="nav-link cursor-hover">
+                    <span class="link-text">Join Our Team</span>
+                    <span class="link-indicator"></span>
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="theme-toggle cursor-hover" aria-label="Toggle dark mode">
+                    <div class="toggle-track">
+                        <span class="toggle-icon sun-icon">☀</span>
+                        <span class="toggle-icon moon-icon">☾</span>
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+                
+                <button class="try-button cursor-hover">
+                    <span class="button-text">Try MeetYu</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Hey, it's nice to</span>
+                    <span class="highlight">Meetyu</span>
+                </h1>
+                
+                <p class="hero-subtitle">Transform your consciousness through AI-powered journaling.</p>
+                
+                <div class="cta-group">
+                    <button class="primary-button">
+                        <span class="button-text">Begin Journey</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                    <a href="#learn" class="text-button">
+                        <span class="button-text">Learn more</span>
+                        <span class="button-icon">↓</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="image-wrapper">
+                    <img src="assets/d_StartPage.svg" alt="MeetYu Interface" class="hero-image">
+                    <div class="image-reflection"></div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    <section id="learn" class="app-showcase" data-scroll-section>
+        <div class="showcase-ambient">
+            <div class="gradient-orb"></div>
+            <div class="gradient-blur"></div>
+            <div class="grain-overlay"></div>
+        </div>
+    
+        <div class="showcase-header" data-scroll>
+            <h2 class="reveal-text">Unlock your full potential.</h2>
+            <p class="reveal-text">Every detail crafted for your journey of self-discovery</p>
+        </div>
+    
+        <div class="device-showcase-wrapper">
+            <div class="device-container" data-scroll data-scroll-speed="2">
+                <div class="iphone-pro">
+                    <div class="iphone-frame">
+                        <div class="hardware">
+                            <div class="notch">
+                                <div class="camera"></div>
+                                <div class="speaker"></div>
+                            </div>
+                            <div class="button volume-up"></div>
+                            <div class="button volume-down"></div>
+                            <div class="button power"></div>
+                            <div class="dynamic-island"></div>
+                        </div>
+                        
+                        <div class="screen">
+                            <div class="screen-content">
+                                <div class="app-screens">
+                                    <div class="screen-item active" data-screen="welcome">
+                                        <img src="assets/app shots/landing.png" alt="Welcome Screen">
+                                        <div class="screen-overlay"></div>
+                                    </div>
+                                    <div class="screen-item" data-screen="ai">
+                                        <img src="assets/app shots/aichatbot.png" alt="AI Chat">
+                                        <div class="screen-overlay"></div>
+                                    </div>
+                                    <div class="screen-item" data-screen="mood">
+                                        <img src="assets/app shots/moodtracking.png" alt="Mood Tracking">
+                                        <div class="screen-overlay"></div>
+                                    </div>
+                                    <div class="screen-item" data-screen="tasks">
+                                        <img src="assets/app shots/to-do.png" alt="Task Management">
+                                        <div class="screen-overlay"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="device-reflections">
+                        <div class="reflection-highlight"></div>
+                        <div class="reflection-glare"></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="feature-navigation" data-scroll>
+                <div class="nav-track">
+                    <div class="feature-item active" data-feature="welcome">
+                        <div class="feature-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="reveal-text">Hey, nice to MeetYu</h3>
+                            <p class="reveal-text">Begin your transformative journey with an experience designed for clarity and purpose.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-number">98%</span>
+                                    <span class="stat-label">User Satisfaction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="feature-item" data-feature="ai">
+                        <div class="feature-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="reveal-text">AI Companion</h3>
+                            <p class="reveal-text">Engage in meaningful conversations powered by advanced artificial intelligence.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-number">24/7</span>
+                                    <span class="stat-label">Always Available</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="feature-item" data-feature="mood">
+                        <div class="feature-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="reveal-text">Emotional Intelligence</h3>
+                            <p class="reveal-text">Track and understand your emotional patterns with beautiful visualizations.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-number">365</span>
+                                    <span class="stat-label">Days of Insights</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="feature-item" data-feature="tasks">
+                        <div class="feature-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        <div class="feature-content">
+                            <h3 class="reveal-text">Mindful Planning</h3>
+                            <p class="reveal-text">Transform your insights into actionable steps for personal growth.</p>
+                            <div class="feature-stats">
+                                <div class="stat">
+                                    <span class="stat-number">10x</span>
+                                    <span class="stat-label">Productivity Boost</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="showcase-progress">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-numbers">
+                <span class="current">01</span>
+                <span class="total">04</span>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

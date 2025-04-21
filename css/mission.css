@@ -1,0 +1,174 @@
+:root {
+    --primary: #6200ff;
+    --text: #1a1a1a;
+    --bg: #ffffff;
+}
+
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary), #4700b3);
+    color: white;
+    padding: 0 10%;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 64px;
+    margin-bottom: 24px;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.sdg-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    padding: 64px 10%;
+    background: var(--bg);
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card .number {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.card p {
+    color: rgba(0,0,0,0.6);
+    line-height: 1.6;
+}
+
+.slide-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.slide-panel.active {
+    transform: translateX(-100%);
+}
+
+.close-btn {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.panel-content {
+    padding: 80px 10%;
+    display: none;
+}
+
+.panel-content.active {
+    display: block;
+}
+
+.panel-header {
+    margin-bottom: 48px;
+}
+
+.panel-header .number {
+    font-size: 32px;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 16px;
+}
+
+.panel-header h2 {
+    font-size: 48px;
+}
+
+.panel-body .intro {
+    font-size: 24px;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.8);
+    margin-bottom: 64px;
+    max-width: 800px;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 48px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+
+.feature p {
+    color: rgba(0,0,0,0.6);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 0 24px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .sdg-cards {
+        padding: 40px 24px;
+    }
+
+    .panel-content {
+        padding: 64px 24px;
+    }
+
+    .panel-header h2 {
+        font-size: 32px;
+    }
+
+    .panel-body .intro {
+        font-size: 20px;
+    }
+}

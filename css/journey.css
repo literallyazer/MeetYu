@@ -1,0 +1,662 @@
+/* Add these imports to your HTML head */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Updated styles */
+:root {
+    /* Use theme variables */
+    --paper-light: #f8f5ee;
+    --paper-dark: #232322;
+    --ink-light: #37352f;
+    --ink-dark: #e2e2e5;
+    --accent-light: #5743FF;
+    --accent-dark: #796EFF;
+    
+    /* Current theme variables */
+    --paper-bg: var(--paper-light);
+    --ink-color: var(--ink-light);
+    --accent-color: var(--accent-light);
+    --paper: #FFFDF8;
+    --paper-dark: #F5E6D3;
+    --ink: #2C2C2C;
+    --primary: #7B61FF;
+    --primary-light: #E8E3FF; /* Light purple for diary card accents */
+    --accent: #FF61B6;
+    --tape: rgba(255, 255, 255, 0.9);
+    --timeline-bg: #1A1A2E;
+    --timeline-border: rgba(123, 97, 255, 0.3);
+    --entry-bg: #20203A;
+    --entry-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    --entry-hover-shadow: 0 10px 30px rgba(123, 97, 255, 0.3);
+    --entry-text: #E2E2F5;
+    --entry-muted: #AAA8C0;
+    --date-bg: rgba(30, 30, 50, 0.8);
+    --date-text: #8A7FFF;
+    --paper-texture: url("../assets/dark-paper-texture.png");
+}
+
+[data-theme="dark"] {
+    --paper-bg: var(--paper-dark);
+    --ink-color: var(--ink-dark);
+    --accent-color: var(--accent-dark);
+}
+
+/* Light mode overrides */
+[data-theme="light"] {
+    --timeline-bg: #F5F5FA;
+    --timeline-border: rgba(123, 97, 255, 0.2);
+    --entry-bg: #FFFFFF;
+    --entry-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    --entry-hover-shadow: 0 10px 30px rgba(123, 97, 255, 0.2);
+    --entry-text: #383854;
+    --entry-muted: #8888AA;
+    --date-bg: rgba(255, 255, 255, 0.9);
+    --date-text: #5743FF;
+    --paper-texture: url("../assets/light-paper-texture.png");
+}
+
+/* Fix timeline layout and structure */
+.journey-content {
+    padding-top: 150px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--timeline-bg);
+    padding-bottom: 100px;
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.journey-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--entry-text);
+}
+
+.journey-header p {
+    font-size: 1.2rem;
+    color: var(--entry-muted);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 180px; /* Increased space for the date */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 120px; /* Center the line with the date */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        rgba(123, 97, 255, 0) 0%,
+        rgba(123, 97, 255, 0.7) 15%,
+        rgba(123, 97, 255, 0.7) 85%,
+        rgba(123, 97, 255, 0) 100%
+    );
+    z-index: 0;
+    box-shadow: 0 0 15px rgba(123, 97, 255, 0.5);
+}
+
+.timeline-entry {
+    position: relative;
+    margin-bottom: 100px; /* Increased spacing between entries */
+}
+
+.entry-date {
+    position: absolute;
+    left: -150px; /* Move date left of the timeline */
+    width: 120px;
+    text-align: center;
+    background-color: var(--date-bg);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--timeline-border);
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.entry-date .month {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--date-text);
+    text-transform: uppercase;
+}
+
+.entry-date .year {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--date-text);
+    margin-top: 5px;
+}
+
+.entry-content {
+    background-color: var(--entry-bg);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--entry-shadow);
+    position: relative;
+    transform: rotate(0.5deg);
+    transition: all 0.3s ease;
+    border: 1px solid var(--timeline-border);
+    background-image: var(--paper-texture);
+    background-blend-mode: overlay;
+    background-size: cover;
+    z-index: 1;
+}
+
+.entry-content::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 20px solid var(--entry-bg);
+    border-bottom: 10px solid transparent;
+    filter: drop-shadow(-3px 3px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Decorative dot with pulse animation */
+.entry-content .decoration-dot {
+    position: absolute;
+    top: 30px;
+    left: -45px; /* Position dot on the timeline */
+    width: 12px;
+    height: 12px;
+    background-color: #7B61FF;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(123, 97, 255, 0.3), 
+                0 0 0 10px rgba(123, 97, 255, 0.1);
+    animation: pulse 3s infinite;
+    z-index: 3;
+}
+
+/* Entry hover effect */
+.entry-content:hover {
+    transform: rotate(0deg) translateY(-5px);
+    box-shadow: var(--entry-hover-shadow);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 0;
+        margin: 0 20px;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-entry {
+        padding-left: 50px;
+    }
+    
+    .entry-date {
+        left: 0;
+        top: -60px;
+        width: auto;
+        padding: 8px 15px;
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    .entry-date .month,
+    .entry-date .year {
+        font-size: 0.9rem;
+    }
+    
+    .entry-content .decoration-dot {
+        left: 15px;
+        top: 25px;
+    }
+    
+    .entry-content::before {
+        left: -10px;
+        top: 20px;
+        border-right: 10px solid var(--entry-bg);
+    }
+}
+
+/* Journal Entry Styling */
+.timeline-entry {
+    position: relative;
+    margin-bottom: 120px;
+    margin-left: 120px;
+    transform-style: preserve-3d;
+}
+
+.entry-content {
+    background-color: var(--entry-bg);
+    color: var(--entry-text);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: var(--entry-shadow);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotate(-1deg);
+    /* Diary card styling with purple accent */
+    border-left: 5px solid var(--primary-light);
+    background-image: var(--paper-texture);
+    background-blend-mode: overlay;
+    background-size: cover;
+    transition: all 0.3s ease;
+}
+
+/* Paper tape effect */
+.entry-content::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 20px solid var(--entry-bg);
+    border-bottom: 10px solid transparent;
+    filter: drop-shadow(-3px 3px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Date styling */
+.entry-date {
+    position: absolute;
+    left: -80px;
+    top: 20px;
+    text-align: right;
+    font-family: 'Caveat', cursive;
+    transform: rotate(-5deg);
+    background-color: var(--date-bg);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--timeline-border);
+}
+
+.entry-date .month {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--date-text);
+}
+
+.entry-date .year {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--date-text);
+}
+
+/* Content styling */
+.entry-content h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.2rem;
+    color: var(--entry-text);
+    margin: 0 0 20px 40px;
+    font-weight: 600;
+    position: relative;
+}
+
+/* Add a decorative element to the heading */
+.entry-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #7B61FF 0%, rgba(123, 97, 255, 0) 100%);
+    border-radius: 3px;
+}
+
+.entry-content p {
+    font-family: 'Noto Serif', serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--entry-text);
+    margin: 0 0 20px 40px;
+    position: relative;
+}
+
+/* First paragraph styling */
+.entry-content p:first-of-type::before {
+    content: '"';
+    position: absolute;
+    left: -15px;
+    top: -5px;
+    font-size: 32px;
+    color: var(--timeline-border);
+    font-family: 'Caveat', cursive;
+}
+
+/* Media content styling */
+.entry-media {
+    margin: 30px 40px;
+    position: relative;
+    max-width: 300px; /* Limit maximum width */
+    display: inline-block; /* Allow text to wrap around */
+    float: right; /* Float images to the right */
+}
+
+/* Clear float after media */
+.entry-content::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.entry-image {
+    width: calc(100% - 20px);
+    border: 10px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: rotate(1deg);
+}
+
+/* Polaroid effect */
+.polaroid {
+    background: white;
+    padding: 15px 15px 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: rotate(1deg);
+    position: relative;
+    border-bottom: 3px solid var(--primary-light);
+}
+
+.polaroid::after {
+    content: attr(data-caption);
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+/* Partner logos styling */
+.partner-logos {
+    margin: 30px 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    transform: rotate(-1deg);
+    border-bottom: 3px solid var(--primary-light);
+}
+
+/* Stats styling */
+.team-stats {
+    margin: 30px 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
+    transform: rotate(1deg);
+    border-bottom: 3px solid var(--primary-light);
+}
+
+.stat .number {
+    font-family: 'Caveat', cursive;
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.stat .label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+}
+
+/* Decorative elements */
+.entry-doodle {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    color: var(--primary);
+    opacity: 0.6;
+}
+
+.doodle-star {
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+}
+
+/* Paper clip effect */
+.paper-clip {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 50px;
+    height: 70px;
+    background: silver;
+    clip-path: path('M 0 0 L 10 0 L 10 60 L 0 60 Z');
+    transform: rotate(-5deg);
+    opacity: 0.7;
+}
+
+/* Entry image styling */
+.entry-image {
+    width: 100%;
+    height: auto;
+    border: 8px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: rotate(1deg);
+}
+
+/* Partner logos container */
+.partner-logos {
+    margin: 30px 40px;
+    padding: 15px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    transform: rotate(-1deg);
+    max-width: 400px;
+}
+
+.partner-logo {
+    height: 30px; /* Reduced size */
+    width: auto;
+}
+
+/* App screenshot specific styling */
+.app-preview {
+    max-width: 200px; /* Smaller app screenshots */
+    margin: 0 auto;
+}
+
+.app-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .entry-media {
+        float: none;
+        margin: 20px auto;
+        max-width: 250px;
+    }
+
+    .partner-logos {
+        flex-direction: column;
+        align-items: center;
+        max-width: 200px;
+        margin: 20px auto;
+    }
+
+    .partner-logo {
+        height: 25px;
+    }
+}
+
+/* Badge styling */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin: 20px 40px;
+    max-width: fit-content;
+}
+
+.badge-icon {
+    height: 24px; /* Smaller KTH logo */
+    width: auto;
+}
+
+.badge span {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+}
+
+/* Polaroid style with improved styling */
+.polaroid {
+    background: white;
+    padding: 12px 12px 35px;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.1),
+        0 0 0 1px rgba(0,0,0,0.02);
+    transform: rotate(2deg);
+    position: relative;
+    max-width: 280px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+    border-bottom: 3px solid var(--primary-light);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.polaroid-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.polaroid-tape {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(2deg);
+    width: 80px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 0.7;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Adjust stats positioning */
+.team-stats {
+    clear: both; /* Clear the float from polaroid */
+    margin: 30px 40px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Make sure text wraps nicely around the polaroid */
+.entry-content p {
+    margin: 0 40px 20px;
+    overflow: hidden;
+}
+
+/* CTA button styling */
+.cta-button {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    margin: 20px 40px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cta-button:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Hashtag styling */
+.hashtags {
+    margin: 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hashtag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transform: rotate(-1deg);
+}
+
+.hashtag:hover {
+    background: var(--primary);
+    color: white;
+    transform: rotate(0deg) scale(1.05);
+}
+
+/* Add a decorative element to the entry content for hashtags */
+.entry-content .decoration-dot {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-light);
+    border-radius: 50%;
+    opacity: 0.5;
+    transform: rotate(5deg);
+}

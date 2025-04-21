@@ -1,0 +1,77 @@
+/* Custom Cursor Styles */
+:root {
+    --cursor-color: #6d28d9;
+    --cursor-outline-color: rgba(109, 40, 217, 0.5);
+    --cursor-size: 10px;
+    --cursor-outline-size: 30px;
+    --cursor-hover-scale: 1.5;
+    --cursor-click-scale: 0.8;
+}
+
+/* Hide default cursor */
+body {
+    cursor: none;
+}
+
+/* Base cursor elements */
+.cursor-dot, .cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: 9999;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+.cursor-dot {
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    background-color: var(--cursor-color);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, transform 0.1s;
+}
+
+.cursor-outline {
+    width: var(--cursor-outline-size);
+    height: var(--cursor-outline-size);
+    background-color: transparent;
+    border: 1px solid var(--cursor-outline-color);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, transform 0.2s ease-out;
+}
+
+/* Hover effect */
+.cursor-hover-active.cursor-dot {
+    transform: translate(-50%, -50%) scale(var(--cursor-hover-scale));
+    background-color: transparent;
+    border: 1px solid var(--cursor-color);
+}
+
+.cursor-hover-active.cursor-outline {
+    transform: translate(-50%, -50%) scale(var(--cursor-hover-scale));
+    border-color: transparent;
+    background-color: rgba(109, 40, 217, 0.1);
+}
+
+/* Click effect */
+.cursor-click.cursor-dot {
+    transform: translate(-50%, -50%) scale(var(--cursor-click-scale));
+    opacity: 0.8;
+}
+
+.cursor-click.cursor-outline {
+    transform: translate(-50%, -50%) scale(var(--cursor-click-scale));
+    opacity: 0.8;
+}
+
+/* Responsive - disable custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot, .cursor-outline {
+        display: none;
+    }
+    
+    body {
+        cursor: auto;
+    }
+} 

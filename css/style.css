@@ -1,0 +1,1641 @@
+/* Modern CSS Reset and Custom Properties */
+:root {
+    /* Primary colors - stored for reference but dark mode will be default */
+    --primary-light: #7B61FF;
+    --primary-dark: #5743FF;
+    --accent-light: #A794FF;
+    --accent-dark: #3C2DFF;
+
+    /* Background colors - light mode */
+    --bg-light: #FFFFFF;
+    --bg-dark: #10101F;
+    --card-light: #F8F8FB;
+    --card-dark: #1A1A2E;
+    
+    /* Text colors - light mode */
+    --text-light: #333344;
+    --text-dark: #E6E6F0;
+    --text-muted-light: #8888AA;
+    --text-muted-dark: #AAA8C0;
+    
+    /* Sizes and spacing */
+    --container-width: 1280px;
+    --nav-height: 80px;
+    --border-radius: 8px;
+    --card-radius: 12px;
+    --button-radius: 50px;
+
+    /* Font sizes */
+    --font-xl: 4rem;
+    --font-lg: 2.5rem;
+    --font-md: 1.5rem;
+    --font-sm: 1rem;
+    --font-xs: 0.875rem;
+    
+    /* Shadows */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 6px 25px rgba(0, 0, 0, 0.08);
+    --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --shadow-button: 0 5px 15px rgba(123, 97, 255, 0.15);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Colors */
+    --color-primary: 138, 43, 226; /* BlueViolet in RGB */
+    --color-secondary: 255, 105, 180; /* HotPink in RGB */
+    --color-accent: 255, 215, 0; /* Gold in RGB */
+    --color-background-light: 248, 250, 252;
+    --color-background-dark: 16, 16, 31;
+    --color-text-light: 56, 56, 84;
+    --color-text-dark: 226, 226, 245;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, rgba(138, 43, 226, 1), rgba(255, 105, 180, 1));
+}
+
+/* Dark mode is now our default set of colors */
+:root {
+    /* Dark theme variables as default */ 
+    --background: var(--bg-dark);
+    --foreground: var(--bg-light);
+    --card-bg: var(--card-dark);
+    --text-color: var(--text-dark);
+    --text-muted: var(--text-muted-dark);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --button-shadow: 0 5px 15px rgba(123, 97, 255, 0.3);
+    --primary: var(--primary-light);
+    --accent: var(--accent-light);
+    --gradient-start: #342EAA;
+    --gradient-end: rgba(16, 16, 31, 0);
+    --backdrop-blur: blur(10px);
+    --nav-bg: rgba(16, 16, 31, 0.8);
+    --nav-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Override variables for light mode */
+[data-theme="light"] {
+    --background: var(--bg-light);
+    --foreground: var(--bg-dark);
+    --card-bg: var(--card-light);
+    --text-color: var(--text-light);
+    --text-muted: var(--text-muted-light);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow: var(--shadow-light);
+    --button-shadow: 0 5px 15px rgba(123, 97, 255, 0.15);
+    --primary: var(--primary-dark);
+    --accent: var(--accent-dark);
+    --gradient-start: #5743FF;
+    --gradient-end: rgba(255, 255, 255, 0);
+    --backdrop-blur: blur(10px);
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --nav-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    --card-shadow: 0 4px 10px rgba(56, 56, 84, 0.1);
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    font-size: var(--font-sm);
+    color: var(--text-color);
+    background-color: var(--background);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: none;
+}
+
+/* Navigation styles */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    box-shadow: var(--nav-shadow);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Ensure nav text is visible on dark */
+nav .logo-text, 
+nav .link-text, 
+nav .button-text {
+    color: var(--text-color);
+}
+
+/* Make toggle switch reflect dark mode by default */
+.toggle-thumb {
+    transform: translateX(24px);
+}
+
+/* Adjust theme toggle colors for dark mode */
+.theme-toggle {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.toggle-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.toggle-thumb {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Active state for dark theme toggle */
+[data-theme="dark"] .toggle-thumb {
+    transform: translateX(28px);
+    background-color: #7B61FF;
+}
+
+/* Default state for light theme toggle */
+[data-theme="light"] .toggle-thumb {
+    transform: translateX(0);
+    background-color: #FAD02C;
+}
+
+.toggle-icon {
+    font-size: 12px;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+}
+
+.sun-icon {
+    color: #FAD02C;
+    opacity: 0.5;
+}
+
+.moon-icon {
+    color: #7B61FF;
+    opacity: 1;
+}
+
+/* Adjust icon opacity based on theme */
+[data-theme="light"] .sun-icon {
+    opacity: 1;
+}
+
+[data-theme="light"] .moon-icon {
+    opacity: 0.5;
+}
+
+/* Make buttons more vibrant on dark theme */
+.try-button, .primary-button {
+    background-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(123, 97, 255, 0.4);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--button-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.try-button:hover, .primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(123, 97, 255, 0.5);
+    background-color: #8C75FF;
+}
+
+/* Feature item styling for dark mode */
+.feature-item {
+    background-color: var(--card-bg);
+    border-radius: var(--card-radius);
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.feature-item.active, 
+.feature-item:hover {
+    background-color: rgba(123, 97, 255, 0.15);
+    box-shadow: 0 5px 20px rgba(123, 97, 255, 0.25);
+    transform: translateY(-5px);
+}
+
+/* Adjust contrast for text elements */
+.hero-title, 
+.section-title, 
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+}
+
+/* Enhance gradient effects for dark theme */
+.gradient-sphere {
+    background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-end) 70%);
+}
+
+/* Make sure stats and numbers are visible */
+.stat-number {
+    color: var(--primary);
+}
+
+.stat-label {
+    color: var(--text-muted);
+}
+
+/* Custom Cursor */
+.cursor-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.88892 1.89451C4.00233 1.08066 2.21897 2.86402 3.03282 4.75061L11.9932 25.5775C12.807 27.4641 15.2372 27.0268 15.4864 24.9999L16.4016 17.9117L23.4897 16.9965C25.5166 16.7473 25.9539 14.3171 24.0673 13.5033L3.24037 4.54294C3.18906 4.52136 3.13781 4.50097 3.08668 4.48177L3.03282 4.75061L5.91453 1.87173L5.88892 1.89451Z' fill='%238a2be2' stroke='%238a2be2' stroke-width='2.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    transform: translate(-3px, -3px);
+    opacity: 1;
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+    will-change: transform;
+}
+
+.cursor-outline {
+    display: none; /* Hide the outline as we're using a single custom cursor */
+}
+
+.cursor-hover-active.cursor-dot {
+    transform: translate(-3px, -3px) scale(1.2);
+    opacity: 0.9;
+}
+
+/* Hide cursor click class since we're using a custom pointer */
+.cursor-click.cursor-dot {
+    transform: translate(-3px, -3px) scale(0.9);
+    opacity: 1;
+    transition: transform 0.1s ease-out;
+}
+
+/* Hide cursor click outline since we're using a custom pointer */
+.cursor-click.cursor-outline {
+    display: none;
+}
+
+/* Hide default cursor when custom cursor is active */
+body {
+    cursor: none;
+}
+
+/* For mobile devices, show default cursor */
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot, .cursor-outline {
+        display: none;
+    }
+    
+    body, a, button, .cursor-hover {
+        cursor: auto;
+    }
+}
+
+/* Cursor hover effects for interactive elements */
+a, button, .nav-link, .logo, .try-button, .primary-button, .text-button, .hashtag {
+    cursor: none;
+}
+
+a:hover ~ .cursor-dot,
+button:hover ~ .cursor-dot,
+.nav-link:hover ~ .cursor-dot,
+.logo:hover ~ .cursor-dot,
+.try-button:hover ~ .cursor-dot,
+.primary-button:hover ~ .cursor-dot,
+.text-button:hover ~ .cursor-dot,
+.hashtag:hover ~ .cursor-dot {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: white;
+}
+
+a:hover ~ .cursor-outline,
+button:hover ~ .cursor-outline,
+.nav-link:hover ~ .cursor-outline,
+.logo:hover ~ .cursor-outline,
+.try-button:hover ~ .cursor-outline,
+.primary-button:hover ~ .cursor-outline,
+.text-button:hover ~ .cursor-outline,
+.hashtag:hover ~ .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(var(--color-primary), 0.4);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Enhanced Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    background: rgba(var(--background-light), 0.8);
+}
+
+[data-theme="dark"] nav {
+    background: rgba(16, 16, 31, 0.8);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+nav.scrolled {
+    padding: 1rem 0;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.nav-container::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(87, 67, 255, 0.2),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+nav.scrolled .nav-container::after {
+    opacity: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.logo-img {
+    height: 2.5rem;
+    width: auto;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo:hover .logo-img {
+    transform: rotate(10deg);
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.5rem 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link.active {
+    color: var(--primary-light);
+    font-weight: 600;
+}
+
+.link-indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover .link-indicator,
+.nav-link.active .link-indicator {
+    transform: scaleX(1);
+}
+
+/* Add glow effect to active link */
+.nav-link.active::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    background: radial-gradient(circle at center, rgba(87, 67, 255, 0.15), transparent 70%);
+    border-radius: 8px;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* Try Button & Primary Button enhanced styles */
+.try-button, .primary-button {
+    background: linear-gradient(
+        135deg,
+        var(--primary-light),
+        var(--primary-dark)
+    );
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(87, 67, 255, 0.3);
+}
+
+.try-button:hover, .primary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(87, 67, 255, 0.4);
+}
+
+/* Add gradient border for theme toggle */
+.theme-toggle {
+    border: 1px solid rgba(87, 67, 255, 0.2);
+    border-radius: 15px;
+    padding: 2px;
+    background: linear-gradient(90deg, rgba(87, 67, 255, 0.05), rgba(87, 67, 255, 0.1));
+}
+
+/* Mobile nav adjustments */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 0;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .logo-text {
+        font-size: 1.25rem;
+    }
+    
+    .logo-img {
+        height: 2rem;
+    }
+    
+    .try-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    padding: 120px var(--space-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    padding-right: var(--space-xl);
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(40px, 5vw, 80px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+}
+
+.title-line {
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: clamp(18px, 2vw, 24px);
+    color: rgba(var(--color-text), 0.6);
+    margin-bottom: var(--space-xl);
+    max-width: 500px;
+}
+
+.cta-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* Hero Visual */
+/* Update these styles in your existing CSS */
+
+.hero-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);  /* Added padding for breathing room */
+}
+
+.image-wrapper {
+    position: relative;
+    width: 120%;  /* Increased from 100% */
+    max-width: 800px;  /* Increased from 600px */
+    aspect-ratio: 16/9;
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform var(--transition-medium);
+    margin-left: -10%;  /* Compensate for the increased width */
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(var(--color-primary), 0.15));
+    transform-origin: center center;
+    scale: 1.1;  /* Slightly scale up the image */
+}
+
+/* Update media queries for responsiveness */
+@media (max-width: 1024px) {
+    .image-wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .hero-image {
+        scale: 1;
+    }
+}
+
+.image-reflection {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: var(--space-xl);
+    }
+    
+    .hero-content {
+        padding-right: 0;
+    }
+    
+    .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .cta-group {
+        justify-content: center;
+    }
+    
+    .image-wrapper {
+        transform: none;
+    }
+    
+    .image-wrapper:hover {
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero {
+        padding: 100px var(--space-md);
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+    }
+}
+/* Add these animations to your existing CSS */
+
+/* Gradient Sphere Animation */
+.gradient-sphere {
+    animation: sphereFloat 20s infinite alternate ease-in-out;
+}
+
+@keyframes sphereFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: hue-rotate(90deg);
+    }
+}
+
+/* Button Hover Effects */
+.primary-button, .try-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-button::after, .try-button::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: none;
+}
+
+.primary-button:hover::after, .try-button:hover::after {
+    transform: translateX(100%);
+    transition: transform 0.8s ease;
+}
+
+/* Nav Link Hover Animation */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::before {
+    transform: translateX(100%);
+}
+
+/* Hero Image Animation */
+.hero-image {
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.image-wrapper:hover .hero-image {
+    transform: scale(1.02);
+}
+
+/* Add this to your existing ambient background */
+.ambient-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(var(--color-primary), 0.1),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ambient-background:hover::before {
+    opacity: 1;
+}
+
+/* Text Reveal Animation */
+.hero-title .title-line {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Smooth Scrollbar */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add these new classes for dynamic effects */
+.nav-container {
+    position: relative;
+}
+
+.nav-container::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(var(--color-primary), 0.2),
+        transparent
+    );
+}
+/* Add these styles for the highlighted text */
+.hero-title .highlight {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    padding: 0 0.1em;
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Add a subtle animation on hover */
+.hero-title .highlight:hover {
+    transform: translateY(-2px);
+}
+
+/* Optional: Add a subtle underline effect */
+.hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+}
+
+.hero-title .highlight:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Enhanced Button States */
+.primary-button, .try-button {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+}
+
+.button-icon {
+    font-family: system-ui;
+    transition: transform 0.3s ease;
+}
+
+.try-button:hover .button-icon,
+.primary-button:hover .button-icon {
+    transform: translateX(4px);
+}
+
+/* Text Button */
+.text-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.text-button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+    transition: width 0.3s ease;
+}
+
+.text-button:hover {
+    color: var(--primary-light);
+}
+
+.text-button:hover::after {
+    width: 100%;
+}
+
+.text-button:hover .button-icon {
+    transform: translateX(4px);
+}
+
+/* Primary button size adjustment */
+.primary-button {
+    font-size: 1.1rem;
+    padding: 0.85rem 1.75rem;
+}
+
+/* Dynamic Image Reflection */
+.image-reflection {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-wrapper:hover .image-reflection {
+    opacity: 1;
+}
+
+/* Premium App Showcase Styles */
+.app-showcase {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 0;
+    background: #fafafa;
+    overflow: hidden;
+}
+
+/* Ambient Background Effects */
+.showcase-ambient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.gradient-orb {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(123, 97, 255, 0.08) 0%,
+        rgba(123, 97, 255, 0.05) 30%,
+        transparent 70%
+    );
+    filter: blur(60px);
+    animation: orbFloat 20s ease-in-out infinite;
+}
+
+.gradient-blur {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(123, 97, 255, 0.05), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 97, 182, 0.05), transparent 50%);
+    filter: blur(100px);
+}
+
+.grain-overlay {
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml;base64,...'); /* Noise pattern */
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+}
+
+/* Header Styles */
+.showcase-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 80px;
+    z-index: 2;
+}
+
+.showcase-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #7B61FF 0%, #FF61B6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.showcase-header p {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: #666;
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Device Showcase */
+.device-showcase-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 100px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.device-container {
+    position: sticky;
+    top: 100px;
+    flex: 0 0 380px;
+    height: 780px;
+    perspective: 1000px;
+}
+
+/* iPhone Pro Styles */
+.iphone-pro {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.iphone-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    border-radius: 55px;
+    box-shadow: 
+        0 50px 100px rgba(0, 0, 0, 0.15),
+        0 0 0 11px #1a1a1a,
+        inset 0 0 0 2px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Hardware Elements */
+.hardware {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 35px;
+    background: #1a1a1a;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.camera {
+    width: 12px;
+    height: 12px;
+    background: #2a2a2a;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.speaker {
+    width: 40px;
+    height: 6px;
+    background: #2a2a2a;
+    border-radius: 3px;
+}
+
+.dynamic-island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #1a1a1a;
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button {
+    position: absolute;
+    background: #2a2a2a;
+    border-radius: 2px;
+}
+
+.volume-up {
+    left: -2px;
+    top: 120px;
+    width: 4px;
+    height: 32px;
+}
+
+.volume-down {
+    left: -2px;
+    top: 170px;
+    width: 4px;
+    height: 32px;
+}
+
+.power {
+    right: -2px;
+    top: 120px;
+    width: 4px;
+    height: 60px;
+}
+
+/* Screen Content */
+.screen {
+    position: absolute;
+    inset: 0;
+    border-radius: 45px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.screen-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.app-screens {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.screen-item {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.screen-item.active {
+    opacity: 1;
+}
+
+.screen-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Feature Navigation */
+.feature-navigation {
+    flex: 1;
+    padding: 60px 0;
+}
+
+.nav-track {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 24px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.feature-item.active {
+    opacity: 1;
+}
+
+.feature-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.feature-item.active .marker-dot {
+    background: linear-gradient(135deg, #7B61FF, #FF61B6);
+}
+
+.marker-line {
+    width: 2px;
+    height: 100%;
+    background: #eee;
+    margin-top: 8px;
+}
+
+.feature-content {
+    flex: 1;
+}
+
+.feature-content h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.feature-content p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Statistics */
+.feature-stats {
+    display: flex;
+    gap: 24px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7B61FF, #FF61B6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Progress Bar */
+.showcase-progress {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(135deg, #7B61FF, #FF61B6);
+    transition: width 0.3s ease;
+}
+
+.progress-numbers {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Animations */
+@keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(5%, 5%); }
+    50% { transform: translate(-5%, 10%); }
+    75% { transform: translate(-10%, -5%); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .device-showcase-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .device-container {
+        position: relative;
+        top: 0;
+        width: 300px;
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .showcase-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .feature-navigation {
+        padding: 40px 20px;
+    }
+
+    .nav-track {
+        gap: 60px;
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.toggle-track {
+    width: 50px;
+    height: 24px;
+    background: linear-gradient(90deg, #E2E2F5, #10101F);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.toggle-thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .toggle-thumb {
+    transform: translateX(26px);
+    background: #10101F;
+}
+
+[data-theme="light"] .toggle-thumb {
+    transform: translateX(0);
+    background: white;
+}
+
+.toggle-icon {
+    font-size: 12px;
+    color: white;
+    z-index: 1;
+}
+
+.sun-icon {
+    color: #FFD700;
+}
+
+.moon-icon {
+    color: #E2E2F5;
+}
+
+.theme-toggle:hover .toggle-track {
+    box-shadow: 0 0 5px rgba(87, 67, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        margin-right: 10px;
+    }
+    
+    .toggle-track {
+        width: 44px;
+        height: 22px;
+    }
+    
+    .toggle-thumb {
+        width: 18px;
+        height: 18px;
+    }
+    
+    [data-theme="dark"] .toggle-thumb {
+        transform: translateX(22px);
+    }
+}
+
+/* Elements that need theme transitions */
+.ambient-background, .gradient-sphere, .logo-img, .try-button, 
+.primary-button, .feature-card, .manifesto-card, .position-card, 
+.answer-card, .hero-title, .hero-subtitle, .nav-link, .logo-text,
+.app-screens, .screen-item, .feature-content h3, .feature-content p,
+.showcase-header h2, .showcase-header p, .progress-bar, .progress-fill {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Card background transitions */
+.feature-card, .manifesto-card, .position-card, .answer-card, .timeline-box, 
+.timeline-entry, .entry-content, .sdg-panel, .team-stats, .stat {
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Adjust text colors for dark mode */
+.hero-title, .hero-subtitle, .section-title, .feature-content h3, 
+.feature-content p, .showcase-header h2, .showcase-header p, 
+.mega-title, .hero-text, .entry-content h2, .entry-content p, 
+.entry-date, .stat-number, .stat-label {
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+/* Adjust button styles for theme */
+.primary-button, .try-button, .text-button, .apply-button, .cta-button {
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Apply dark background to the entire page and all sections */
+body, 
+main,
+section,
+.app-showcase,
+.quiz-container,
+.team-content,
+.journey-content {
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+/* Ensure proper padding for all pages to prevent nav overlap */
+main, 
+.app-showcase,
+.quiz-container,
+.team-content,
+.journey-content {
+    padding-top: 100px; /* Adjust this value as needed */
+}
+
+/* Fix showcase section styling for dark mode */
+.app-showcase {
+    background-color: var(--background);
+    color: var(--text-color);
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+}
+
+.showcase-header h2,
+.showcase-header p,
+.feature-content h3,
+.feature-content p {
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.feature-content .stat-label {
+    color: var(--text-muted);
+}
+
+.showcase-ambient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.gradient-orb {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-end) 70%);
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: blur(60px);
+    animation: orbFloat 15s infinite alternate ease-in-out;
+}
+
+.gradient-blur {
+    position: absolute;
+    bottom: 5%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle at center, var(--gradient-start) 0%, var(--gradient-end) 70%);
+    border-radius: 50%;
+    opacity: 0.4;
+    filter: blur(80px);
+    animation: orbFloat 20s infinite alternate-reverse ease-in-out;
+}
+
+/* Add proper z-index to navigation to ensure it's on top */
+nav {
+    z-index: 1000;
+}
+
+/* Fix nav links visibility in dark mode */
+.nav-link .link-text {
+    color: var(--text-color);
+}
+
+/* Fix timeline issues in journey page */
+.timeline {
+    position: relative;
+    padding-left: 150px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline-entry {
+    margin-bottom: 60px;
+}
+
+.entry-date {
+    position: absolute;
+    left: 0;
+    width: 120px;
+    text-align: center;
+}
+
+/* Fix SDG pill styles for about page */
+.sdg-pill {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.sdg-section,
+.sdg-title,
+.sdg-text,
+.sdg-grid {
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+/* Fix quiz page */
+.quiz-container,
+.timeline-box,
+.box-content,
+.box-header {
+    background-color: var(--background);
+    color: var(--text-color);
+}
+
+.timeline-box {
+    background-color: var(--card-bg);
+}
+
+.answer-card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.answer-card .description {
+    color: var(--text-muted);
+}
+
+/* Fix progress bar colors */
+.progress-bar {
+    background-color: rgba(123, 97, 255, 0.1);
+}
+
+.progress-fill {
+    background-color: var(--primary);
+}
+
+/* Fix hero padding to prevent nav overlap */
+.hero {
+    padding-top: 100px;
+}
+
+/* Additional footer adjustments for all pages */
+footer {
+    background-color: var(--background);
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Make sure theme toggle is visible across all pages */
+.theme-toggle {
+    z-index: 1001;
+}

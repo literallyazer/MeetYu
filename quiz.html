@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why MeetYu? | Take the Quiz</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <script src="js/main.js"></script>
+    <script src="js/quiz.js" defer></script>
+    <script src="js/cursor.js" defer></script>
+    <script src="js/theme.js" defer></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Ambient background -->
+    <div class="ambient-background">
+        <div class="gradient-sphere"></div>
+        <div class="grain-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container cursor-hover">
+            <a href="index.html" class="logo cursor-hover">
+                <img src="assets/MeetYu_Logo_Small.png" alt="MeetYu Logo" class="logo-img cursor-hover">
+                <span class="logo-text">MeetYu</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="journey.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Journey</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="quiz.html" class="nav-link active cursor-hover">
+                    <span class="link-text">Why MeetYu?</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="about.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Mission</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="team.html" class="nav-link cursor-hover">
+                    <span class="link-text">Join Our Team</span>
+                    <span class="link-indicator"></span>
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="theme-toggle cursor-hover" aria-label="Toggle dark mode">
+                    <div class="toggle-track">
+                        <span class="toggle-icon sun-icon">☀</span>
+                        <span class="toggle-icon moon-icon">☾</span>
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+                
+                <button class="try-button cursor-hover">
+                    <span class="button-text">Try MeetYu</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="quiz-container">
+        <section class="quiz-hero">
+            <div class="quiz-hero-content">
+                <h1 class="quiz-title">
+                    <span class="title-line">Is MeetYu</span>
+                    <span class="highlight">Right For You?</span>
+                </h1>
+                <p class="quiz-subtitle">Take our immersive quiz to discover how MeetYu can transform your daily experience</p>
+            </div>
+        </section>
+
+        <section class="quiz-section">
+            <div class="quiz-wrapper">
+                <!-- Initial quiz screen -->
+                <div class="quiz-start-screen">
+                    <div class="start-content">
+                        <div class="quiz-icon">
+                            <div class="pulse-circle"></div>
+                            <span class="icon-brain">🧠</span>
+                        </div>
+                        <h2>Discover Your Alignment</h2>
+                        <p>This quick 5-question assessment will help determine how MeetYu can enhance your personal growth journey.</p>
+                        <ul class="quiz-features">
+                            <li><span class="feature-icon">⏱️</span> Takes only 2 minutes</li>
+                            <li><span class="feature-icon">🎯</span> Personalized insights</li>
+                            <li><span class="feature-icon">✨</span> Unlock special recommendations</li>
+                        </ul>
+                        <button class="start-quiz-btn primary-button cursor-hover">
+                            <span class="button-text">Begin Assessment</span>
+                            <span class="button-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz questions container -->
+                <div class="quiz-questions-container" style="display: none;">
+                    <div class="quiz-header">
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Question <span class="current-question">1</span> of <span class="total-questions">5</span></div>
+                        </div>
+                    </div>
+
+                    <div class="questions-wrapper">
+                        <!-- Questions will be dynamically inserted here -->
+                    </div>
+
+                    <div class="quiz-navigation">
+                        <button class="nav-button prev-btn cursor-hover" disabled>
+                            <span class="button-icon">←</span>
+                            <span class="button-text">Previous</span>
+                        </button>
+                        <button class="nav-button next-btn cursor-hover">
+                            <span class="button-text">Next</span>
+                            <span class="button-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results screen -->
+                <div class="quiz-results-screen" style="display: none;">
+                    <div class="results-content">
+                        <h2>Your MeetYu Compatibility</h2>
+                        
+                        <div class="results-gauge">
+                            <div class="gauge-container">
+                                <div class="gauge-bg"></div>
+                                <div class="gauge-fill"></div>
+                                <div class="gauge-center"></div>
+                                <div class="gauge-needle"></div>
+                                <div class="gauge-percentage">0%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="results-message">
+                            <h3>Perfect Match!</h3>
+                            <p>Based on your responses, MeetYu aligns perfectly with your personal development goals and preferences.</p>
+                        </div>
+                        
+                        <div class="results-insights">
+                            <h4>Key Insights</h4>
+                            <ul class="insights-list">
+                                <!-- Insights will be dynamically inserted here -->
+                            </ul>
+                        </div>
+                        
+                        <div class="results-cta">
+                            <button class="primary-button cursor-hover">
+                                <span class="button-text">Try MeetYu Now</span>
+                                <span class="button-icon">→</span>
+                            </button>
+                            <button class="text-button restart-quiz cursor-hover">
+                                <span class="button-text">Retake Quiz</span>
+                                <span class="button-icon">↻</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card cursor-hover">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text"> to fill later.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background-image: url('assets/testimonial-1.jpg');"></div>
+                            <div class="author-info">
+                                <h4>azer </h4>
+                                <p>job title • Using MeetYu for 6 months</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card cursor-hover">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">to fill later.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background-image: url('assets/testimonial-2.jpg');"></div>
+                            <div class="author-info">
+                                <h4>azzer </h4>
+                                <p>job title • Using MeetYu for 8 months</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card cursor-hover">
+                    <div class="testimonial-content">
+                        <div class="quote-mark">"</div>
+                        <p class="testimonial-text">to fill later.</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background-image: url('assets/testimonial-3.jpg');"></div>
+                            <div class="author-info">
+                                <h4>azer</h4>
+                                <p>job title • Using MeetYu for 4 months</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+</body>
+</html>

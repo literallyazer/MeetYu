@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission | MeetYu</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
+    <script src="js/main.js"></script>
+    <script src="js/about.js" defer></script>
+    <script src="js/cursor.js" defer></script>
+    <script src="js/theme.js" defer></script>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Ambient background -->
+    <div class="ambient-background">
+        <div class="gradient-sphere"></div>
+        <div class="grain-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container cursor-hover">
+            <a href="index.html" class="logo cursor-hover">
+                <img src="assets/MeetYu_Logo_Small.png" alt="MeetYu Logo" class="logo-img cursor-hover">
+                <span class="logo-text">MeetYu</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="journey.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Journey</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="quiz.html" class="nav-link cursor-hover">
+                    <span class="link-text">Why MeetYu?</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="about.html" class="nav-link active cursor-hover">
+                    <span class="link-text">Our Mission</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="team.html" class="nav-link cursor-hover">
+                    <span class="link-text">Join Our Team</span>
+                    <span class="link-indicator"></span>
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="theme-toggle cursor-hover" aria-label="Toggle dark mode">
+                    <div class="toggle-track">
+                        <span class="toggle-icon sun-icon">☀</span>
+                        <span class="toggle-icon moon-icon">☾</span>
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+                
+                <button class="try-button cursor-hover">
+                    <span class="button-text">Try MeetYu</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="about-content">
+        <!-- Content will be added later -->
+        <section class="about-hero">
+            <h1 class="mission-statement">Elevating human consciousness through technology</h1>
+            <p class="mission-subtitle">We're on a mission to help everyone achieve their highest potential</p>
+        </section>
+    </main>
+</body>
+</html>

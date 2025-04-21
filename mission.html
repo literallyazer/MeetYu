@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission | MeetYu</title>
+    <meta http-equiv="refresh" content="0;url=about.html">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        a {
+            color: #7C4DFF;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #7C4DFF;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            background-color: #7C4DFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>You are being redirected to our new Mission page.</p>
+    <a href="about.html">Click here if you are not redirected automatically</a>
+
+    <!-- Navigation with cursor hover classes -->
+    <nav>
+        <div class="nav-container cursor-hover">
+            <a href="index.html" class="logo cursor-hover">
+                <span class="logo-icon"></span>
+                <span class="logo-text">MeetYu</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="journey.html" class="nav-link cursor-hover">
+                    <span class="link-text">Our Journey</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="quiz.html" class="nav-link cursor-hover">
+                    <span class="link-text">Why MeetYu?</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="mission.html" class="nav-link active cursor-hover">
+                    <span class="link-text">Our Mission</span>
+                    <span class="link-indicator"></span>
+                </a>
+                <a href="team.html" class="nav-link cursor-hover">
+                    <span class="link-text">Join Our Team</span>
+                    <span class="link-indicator"></span>
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="theme-toggle cursor-hover" aria-label="Toggle dark mode">
+                    <div class="toggle-track">
+                        <span class="toggle-icon sun-icon">☀</span>
+                        <span class="toggle-icon moon-icon">☾</span>
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+                
+                <button class="try-button cursor-hover">
+                    <span class="button-text">Try MeetYu</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Add cursor-hover class to any interactive elements in the main content -->
+    <div class="cta-container">
+        <button class="cta-button primary cursor-hover">Join Our Mission</button>
+        <button class="cta-button secondary cursor-hover">Learn More</button>
+    </div>
+</body>
+</html>

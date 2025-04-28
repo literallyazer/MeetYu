@@ -42,52 +42,52 @@ class MeetYuQuiz {
         this.questions = [
             {
                 id: 1,
-                text: "How often do you reflect on your thoughts, feelings, and experiences?",
+                text: "How often do you reflect on your day?",
                 options: [
-                    { id: 1, text: "Daily - I make it a regular practice", value: 20 },
+                    { id: 1, text: "Every day", value: 20 },
                     { id: 2, text: "A few times a week", value: 15 },
-                    { id: 3, text: "Occasionally when something significant happens", value: 10 },
-                    { id: 4, text: "Rarely - I don't usually take time for reflection", value: 5 }
+                    { id: 3, text: "Sometimes", value: 10 },
+                    { id: 4, text: "Rarely", value: 5 }
                 ]
             },
             {
                 id: 2,
-                text: "What's your primary goal for personal development?",
+                text: "What's your main goal for journaling?",
                 options: [
-                    { id: 1, text: "Gaining deeper self-awareness", value: 20 },
-                    { id: 2, text: "Improving emotional intelligence", value: 18 },
-                    { id: 3, text: "Building better habits and productivity", value: 15 },
-                    { id: 4, text: "Resolving specific challenges in my life", value: 12 }
+                    { id: 1, text: "Self-awareness", value: 20 },
+                    { id: 2, text: "Emotional growth", value: 18 },
+                    { id: 3, text: "Build habits", value: 15 },
+                    { id: 4, text: "Solve problems", value: 12 }
                 ]
             },
             {
                 id: 3,
-                text: "How do you feel about AI assistance in your personal growth journey?",
+                text: "How do you feel about AI in journaling?",
                 options: [
-                    { id: 1, text: "Very positive - AI can offer valuable insights", value: 20 },
-                    { id: 2, text: "Somewhat positive - AI can be helpful with the right balance", value: 15 },
-                    { id: 3, text: "Neutral - I'm open to exploring its benefits", value: 10 },
-                    { id: 4, text: "Somewhat cautious - I prefer minimal AI involvement", value: 5 }
+                    { id: 1, text: "Love it", value: 20 },
+                    { id: 2, text: "Open to it", value: 15 },
+                    { id: 3, text: "Neutral", value: 10 },
+                    { id: 4, text: "Prefer less AI", value: 5 }
                 ]
             },
             {
                 id: 4,
-                text: "Which feature would be most valuable in a journaling application?",
+                text: "What's most important in a journaling app?",
                 options: [
-                    { id: 1, text: "Pattern recognition in my thoughts and emotions", value: 20 },
-                    { id: 2, text: "Guided prompts and questions for deeper reflection", value: 18 },
-                    { id: 3, text: "Mood tracking and emotional insights", value: 15 },
-                    { id: 4, text: "Clean, distraction-free writing space", value: 12 }
+                    { id: 1, text: "Spotting patterns", value: 20 },
+                    { id: 2, text: "Helpful prompts", value: 18 },
+                    { id: 3, text: "Mood tracking", value: 15 },
+                    { id: 4, text: "Simple writing", value: 12 }
                 ]
             },
             {
                 id: 5,
-                text: "How important is privacy and data security in your journaling practice?",
+                text: "How important is privacy?",
                 options: [
-                    { id: 1, text: "Extremely important - my thoughts are deeply personal", value: 20 },
-                    { id: 2, text: "Very important - I want strong privacy guarantees", value: 18 },
-                    { id: 3, text: "Somewhat important - basic security measures are sufficient", value: 15 },
-                    { id: 4, text: "Not very concerned - convenience is more important", value: 10 }
+                    { id: 1, text: "Essential", value: 20 },
+                    { id: 2, text: "Very important", value: 18 },
+                    { id: 3, text: "Somewhat important", value: 15 },
+                    { id: 4, text: "Not a big deal", value: 10 }
                 ]
             }
         ];
@@ -480,37 +480,27 @@ class MeetYuQuiz {
         const score = this.calculateScore();
         const resultCategory = this.getResultCategory(score);
         const resultData = this.resultMapping[resultCategory];
-        
         // Update result content
         if (this.resultsTitle) {
             this.resultsTitle.textContent = resultData.title;
         }
-        
         if (this.resultsMessage) {
             this.resultsMessage.textContent = resultData.message;
         }
-        
         // Populate insights
         this.populateInsights(resultCategory);
-        
         // Transition to results screen
         if (this.questionsContainer) {
             this.questionsContainer.classList.add('fade-out');
         }
-        
         setTimeout(() => {
             if (this.questionsContainer) {
                 this.questionsContainer.style.display = 'none';
             }
-            
             if (this.resultsScreen) {
                 this.resultsScreen.style.display = 'block';
                 this.resultsScreen.classList.add('fade-in');
-                
-                // Animate gauge after a short delay
-                setTimeout(() => {
-                    this.animateGauge(score);
-                }, 500);
+                // No gauge percentage animation
             }
         }, 500);
     }
